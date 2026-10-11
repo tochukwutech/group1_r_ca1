@@ -25,6 +25,11 @@ dim(student_data)
 # SECTION 2: Create Adjusted_Score
 # Anthony's part
 
+#Create Adjusted score by adding 5 to each student's Test score
+student_data$Adjusted_Score <- student_data$Test_Score + 5
+
+# Display the original and adjusted scores
+student_data[ , c("Student", "Test_Score", "Adjusted_Score")]
 
 # SECTION 3: Determine Pass or Fail
 # Chifumnanya's part
