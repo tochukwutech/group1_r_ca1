@@ -6,45 +6,29 @@
 # Ayo's part
 
 ## Task a: data import and inspection
-
-#import the data set / storing in an R object
 student_data <- read.csv("student_performance.csv")
-
-# Displaying first few observations
 head(student_data)
-
-# display column name and data structure
 names(student_data)
-
 str(student_data)
-
-#dim to show the number of rows and col
 dim(student_data)
-
 
 # SECTION 2: Create Adjusted_Score
 # Anthony's part
 
-#Create Adjusted score by adding 5 to each student's Test score
 student_data$Adjusted_Score <- student_data$Test_Score + 5
-
-# Display the original and adjusted scores
 student_data[ , c("Student", "Test_Score", "Adjusted_Score")]
-
 
 # SECTION 3: Create Conditional Logic to Determine Pass or Fail
 # Chifumnaya's part
 
 student_data$Result <- ifelse(student_data$Test_Score >= 50, "Pass", "Fail")
-# Output
 head(student_data)
 table(student_data$Result)
 
-
 # SECTION 4: Determine Eligibility
 # Tunmilara's part
-student_data$Eligible <- student_data$Attendance >= 75 & student_data$Test_Score >= 50
 
+student_data$Eligible <- student_data$Attendance >= 75 & student_data$Test_Score >= 50
 student_data[, c("Student", "Attendance", "Test_Score", "Eligible")]
 table(student_data$Eligible)
 
