@@ -34,6 +34,9 @@ table(student_data$Eligible)
 
 # SECTION 5: Handle Missing Values
 # Gbolahon's part
+ student_data$Test_Score[student_data$Student == "Femi"] <- NA
+ sum(is.na(student_data$Test_Score))
+ mean(student_data$Test_Score, na.rm = TRUE)
 
 
 # SECTION 6: Analyse Student Performance
