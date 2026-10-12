@@ -31,7 +31,10 @@ student_data$Adjusted_Score <- student_data$Test_Score + 5
 # Display the original and adjusted scores
 student_data[ , c("Student", "Test_Score", "Adjusted_Score")]
 
-# Chifumnaya's part: Conditional Logic to Determine Pass or Fail
+
+# SECTION 3: Create Conditional Logic to Determine Pass or Fail
+# Chifumnaya's part
+
 student_data$Result <- ifelse(student_data$Test_Score >= 50, "Pass", "Fail")
 # Output
 head(student_data)
