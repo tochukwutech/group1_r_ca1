@@ -34,7 +34,7 @@ dim(student_data)
 # Tunmilara's part
 student_data$Eligible <- student_data$Attendance >= 75 & student_data$Test_Score >= 50
 
-student_data[ c("Student", "Attendance", "Test_Score", "Eligible")]
+student_data[, c("Student", "Attendance", "Test_Score", "Eligible")]
 table(student_data$Eligible)
 
 # SECTION 5: Handle Missing Values
