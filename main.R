@@ -26,8 +26,11 @@ dim(student_data)
 # Anthony's part
 
 
-# SECTION 3: Determine Pass or Fail
-# Chifumnanya's part
+# Chifumnaya's part: Conditional Logic to Determine Pass or Fail
+student_data$Result <- ifelse(student_data$Test_Score >= 50, "Pass", "Fail")
+# Output
+head(student_data)
+table(student_data$Result)
 
 
 # SECTION 4: Determine Eligibility
