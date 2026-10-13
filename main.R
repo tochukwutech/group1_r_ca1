@@ -42,6 +42,17 @@ table(student_data$Eligible)
 # SECTION 6: Analyse Student Performance
 # Folarin's part
 
+highest_score_index <- which.max(student_data$Test_Score)
+top_student_name <- student_data$Student[highest_score_index]
+highest_score <- student_data$Test_Score[highest_score_index]
+cat("The student with the highest test score is: ", top_student_name, "(Score:", highest_score, ")\n")
+
+passed_students <- sum(student_data$Result == "Pass", na.rm = TRUE)
+cat("The number of students who passed:", passed_students, "\n")
+
+eligible_students <- sum(student_data$Eligible, na.rm = TRUE)
+cat("The number of eligible students:", eligible_students, "\n")
+
 
 # SECTION 7: Interpret the Results
 # Miracle's part
