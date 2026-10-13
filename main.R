@@ -5,7 +5,6 @@
 # SECTION 1: Import and inspect the dataset
 # Ayo's part
 
-## Task a: data import and inspection
 student_data <- read.csv("student_performance.csv")
 head(student_data)
 names(student_data)
@@ -14,6 +13,7 @@ dim(student_data)
 
 # SECTION 2: Handle Missing Values
 # Gbolahon's part
+
  student_data$Test_Score[student_data$Student == "Femi"] <- NA
  sum(is.na(student_data$Test_Score))
  mean(student_data$Test_Score, na.rm = TRUE)
