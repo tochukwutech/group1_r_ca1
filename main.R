@@ -88,51 +88,98 @@ cat("The number of eligible students:", eligible_students, "\n")
 
 # SECTION 8: Validate and Export the Dataset
 # Dahunsi's part
-# ==============================================================
-script_file <- "main.R"
-
-tryCatch({
-  source(script_file, echo = FALSE)
-  message("PASS: main.R ran from start to finish without errors.")
-}, error = function(e) {
-  stop("FAIL: main.R stopped with an error: ", conditionMessage(e))
-})
+# Store the processed dataset
 
 processed_data <- student_data
 
-required_columns <- c("Student", "Age", "Attendance", "Test_Score")
+# Check that all required columns exist
+
+required_columns <- c(
+  
+  "Student",
+  
+  "Age",
+  
+  "Attendance",
+  
+  "Test_Score",
+  
+  "Adjusted_Score",
+  
+  "Result",
+  
+  "Eligible"
+  
+)
 
 missing_cols <- setdiff(required_columns, names(processed_data))
 
 if (length(missing_cols) == 0) {
+  
   message("PASS: All required columns are present.")
+  
 } else {
-  message("FAIL: Missing columns: ", paste(missing_cols, collapse = ", "))
+  
+  stop(
+    
+    "FAIL: Missing columns: ",
+    
+    paste(missing_cols, collapse = ", ")
+    
+  )
+  
 }
+
+# Export the processed dataset
 
 output_file <- "student_performance_processed.csv"
 
 write.csv(processed_data, output_file, row.names = FALSE)
 
-if (file.exists(output_file)) {
-  message("PASS: ", output_file, " exported successfully.")
-} else {
-  message("FAIL: ", output_file, " was not created.")
+# Confirm that the file exists
+
+if (!file.exists(output_file)) {
+  
+  stop("FAIL: Processed CSV was not created.")
+  
 }
+
+message("PASS: ", output_file, " exported successfully.")
+
+# Read the exported file back into R
 
 exported <- read.csv(output_file)
 
-message("Rows:    processed = ", nrow(processed_data),
-        " | exported = ", nrow(exported))
-message("Columns: processed = ", ncol(processed_data),
-        " | exported = ", ncol(exported))
+# Validate the exported dataset
 
-if (nrow(exported) == nrow(processed_data) &&
-    identical(names(exported), names(processed_data))) {
-  message("PASS: Exported file contains all processed records and columns.")
+if (
+  
+  identical(names(exported), names(processed_data)) &&
+  
+  nrow(exported) == nrow(processed_data) &&
+  
+  isTRUE(all.equal(
+    
+    exported,
+    
+    processed_data,
+    
+    check.attributes = FALSE
+    
+  ))
+  
+) {
+  
+  message("PASS: Exported data matches the processed data.")
+  
 } else {
-  message("FAIL: Exported file does not match the processed data.")
+  
+  stop("FAIL: Exported data differs from the processed data.")
+  
 }
 
+# Display dataset structure and first few observations
+
 str(exported)
+
 head(exported)
