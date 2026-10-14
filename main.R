@@ -104,17 +104,13 @@ if (length(missing_cols) == 0) {
     paste(missing_cols, collapse = ", ")
   )
 }
-# Export the processed dataset
 output_file <- "student_performance_processed.csv"
 write.csv(processed_data, output_file, row.names = FALSE)
-# Confirm that the file exists
 if (!file.exists(output_file)) {
   stop("FAIL: Processed CSV was not created.")
 }
 message("PASS: ", output_file, " exported successfully.")
-# Read the exported file back into R
 exported <- read.csv(output_file)
-# Validate the exported dataset
 if (
   identical(names(exported), names(processed_data)) &&
   nrow(exported) == nrow(processed_data) &&
@@ -124,6 +120,5 @@ if (
 } else {
   stop("FAIL: Exported data differs from the processed data.")
 }
-# Display dataset structure and first few observations
 str(exported)
 head(exported)
