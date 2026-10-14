@@ -93,93 +93,37 @@ cat("The number of eligible students:", eligible_students, "\n")
 processed_data <- student_data
 
 # Check that all required columns exist
-
-required_columns <- c(
-  
-  "Student",
-  
-  "Age",
-  
-  "Attendance",
-  
-  "Test_Score",
-  
-  "Adjusted_Score",
-  
-  "Result",
-  
-  "Eligible"
-  
-)
-
+required_columns <- c("Student", "Age", "Attendance", "Test_Score", "Adjusted_Score", "Result", "Eligible")
 missing_cols <- setdiff(required_columns, names(processed_data))
 
 if (length(missing_cols) == 0) {
-  
   message("PASS: All required columns are present.")
-  
 } else {
-  
   stop(
-    
     "FAIL: Missing columns: ",
-    
     paste(missing_cols, collapse = ", ")
-    
   )
-  
 }
-
 # Export the processed dataset
-
 output_file <- "student_performance_processed.csv"
-
 write.csv(processed_data, output_file, row.names = FALSE)
-
 # Confirm that the file exists
-
 if (!file.exists(output_file)) {
-  
   stop("FAIL: Processed CSV was not created.")
-  
 }
-
 message("PASS: ", output_file, " exported successfully.")
-
 # Read the exported file back into R
-
 exported <- read.csv(output_file)
-
 # Validate the exported dataset
-
 if (
-  
   identical(names(exported), names(processed_data)) &&
-  
   nrow(exported) == nrow(processed_data) &&
-  
-  isTRUE(all.equal(
-    
-    exported,
-    
-    processed_data,
-    
-    check.attributes = FALSE
-    
-  ))
-  
+  isTRUE(all.equal(exported, processed_data, check.attributes = FALSE))
 ) {
-  
   message("PASS: Exported data matches the processed data.")
-  
 } else {
-  
   stop("FAIL: Exported data differs from the processed data.")
-  
 }
-
 # Display dataset structure and first few observations
-
 str(exported)
-
 head(exported)
