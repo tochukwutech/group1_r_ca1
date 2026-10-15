@@ -111,13 +111,10 @@ if (!file.exists(output_file)) {
 }
 message("PASS: ", output_file, " exported successfully.")
 exported <- read.csv(output_file)
-if (
-  identical(names(exported), names(processed_data)) &&
-  nrow(exported) == nrow(processed_data) &&
-  isTRUE(all.equal(exported, processed_data, check.attributes = FALSE))
-) {
+if (identical(names(exported), names(processed_data)) && nrow(exported) == nrow(processed_data) && isTRUE(all.equal(exported, processed_data, check.attributes = FALSE))) {
   message("PASS: Exported data matches the processed data.")
-} else {
+} 
+else {
   stop("FAIL: Exported data differs from the processed data.")
 }
 str(exported)
